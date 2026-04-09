@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0a1410;
+  --color-surface: #0a1410;
+  --color-surface-bright: #36403a;
+  --color-surface-dim: #0a1410;
+  --color-surface-variant: #313c36;
+  --color-surface-container-lowest: #080a09;
+  --color-surface-container-low: #18221c;
+  --color-surface-container: #1c2620;
+  --color-surface-container-high: #26312a;
+  --color-surface-container-highest: #313c36;
+  
+  --color-primary: #e3ffed;
+  --color-primary-container: #00ff9f;
+  --color-on-primary-container: #00713d;
+  --color-primary-fixed: #6fffc0;
+  --color-primary-fixed-dim: #00e6a1;
+  
+  --color-secondary: #bdffda;
+  --color-secondary-container: #34966d;
+  
+  --color-on-surface: #e0f2eb;
+  --color-on-surface-variant: #b9cbca;
+  
+  --color-outline: #849594;
+  --color-outline-variant: #3a4b4a;
+
+  --font-body: var(--font-inter), ui-sans-serif, system-ui;
+  --font-headline: var(--font-space-grotesk), ui-sans-serif, system-ui;
+  --font-orbitron: var(--font-orbitron), ui-sans-serif, system-ui;
+  --font-label: var(--font-space-grotesk), ui-sans-serif, system-ui;
+
+  --radius-DEFAULT: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+}
+
+@layer utilities {
+  .glass-card {
+    background: rgba(49, 53, 60, 0.4);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+  
+  .glow-border {
+    box-shadow: inset 0 0 0 1px rgba(0, 255, 159, 0.15);
+  }
+  
+  .glow-border:hover {
+    box-shadow: inset 0 0 0 1px rgba(0, 255, 159, 0.4);
+  }
+
+  .hero-gradient {
+    background: radial-gradient(circle at center, rgba(0, 255, 159, 0.05) 0%, transparent 70%);
+  }
+}
+
+:root {
+  --background: #0a1410;
+  --foreground: #e0f2eb;
+  --color-primary-container: #00ff9f;
+  --color-primary: #e3ffed;
+  --color-primary-fixed: #6fffc0;
+  --color-primary-fixed-dim: #00e6a1;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+}
+
+* {
+  border-color: var(--color-outline-variant);
+}
