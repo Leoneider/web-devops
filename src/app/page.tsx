@@ -2,6 +2,7 @@
 
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import ProjectOverview from "@/components/ProjectOverview";
 import BentoGrid from "@/components/BentoGrid";
 import TechGrid from "@/components/TechGrid";
 import Timeline from "@/components/Timeline";
@@ -27,6 +28,7 @@ export default function Home() {
       
       <Navbar />
       <Hero />
+      <ProjectOverview />
       <BentoGrid />
       <TechGrid />
       <Timeline />

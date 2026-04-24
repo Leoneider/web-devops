@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { MessageCircle } from "lucide-react";
 
 export default function Hero() {
   const targetRef = useRef<HTMLDivElement>(null);
@@ -34,7 +35,7 @@ export default function Hero() {
           className="w-full h-full object-cover"
         >
           <source
-            src="https://d8j0ntlcm91z4.cloudfront.net/user_3BoC0y6GAFoP6m8FdHglPZerqcg/hf_20260405_200550_0ddfbc66-6680-4849-b8ac-f431e392e9ec.mp4"
+            src="/devops-video.mp4"
             type="video/mp4"
           />
         </video>
@@ -50,7 +51,7 @@ export default function Hero() {
           className="mb-4 inline-block px-4 py-1 border border-primary-container/30 bg-primary-container/5 rounded-full"
         >
           <span className="text-primary-container font-label text-[10px] md:text-xs tracking-[0.3em] uppercase">
-            Identidad: DevOps42 // Estado: Nominal
+            Identidad: DevOps42 // Estado: Online
           </span>
         </motion.div>
 
@@ -79,11 +80,24 @@ export default function Hero() {
           transition={{ delay: 0.6 }}
           className="flex flex-col md:flex-row gap-6 justify-center items-center"
         >
-          <button className="px-8 md:px-10 py-4 bg-gradient-to-r from-primary-container to-primary-fixed-dim text-on-primary font-bold uppercase tracking-widest rounded-sm hover:shadow-[0_0_30px_rgba(0,255,159,0.4)] transition-all duration-500 hover:scale-105 active:scale-95">
-            Ver Proyectos
-          </button>
-          <button className="px-8 md:px-10 py-4 border border-outline-variant text-primary uppercase tracking-widest rounded-sm hover:bg-white/5 transition-all hover:scale-105 active:scale-95">
-            Stack Tecnológico
+          <motion.button
+            whileHover={{
+              scale: 1.03,
+              boxShadow: "0 0 55px rgba(0, 255, 159, 0.5)",
+            }}
+            whileTap={{ scale: 0.98 }}
+            className="cta-premium inline-flex items-center justify-center rounded-xl border border-[#25D366]/40 bg-[#25D366]/15 px-8 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-primary-container shadow-[0_0_20px_rgba(0,255,159,0.25)] transition hover:bg-[#25D366]/25 group"
+          >
+            <span className="relative z-10 flex items-center justify-center gap-3">
+              <MessageCircle className="w-5 h-5" />
+              Contactar por WS
+            </span>
+          </motion.button>
+
+          <button
+            className="inline-flex items-center justify-center rounded-xl border border-primary-container/30 bg-transparent px-8 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white transition-all hover:border-primary-container/60 hover:bg-primary-container/5 hover:shadow-[0_0_15px_rgba(0,255,159,0.1)] active:scale-95"
+          >
+            <span>Stack Tecnológico</span>
           </button>
         </motion.div>
       </motion.div>

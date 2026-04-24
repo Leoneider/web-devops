@@ -13,7 +13,7 @@ const EVENTS = [
   },
   {
     year: "2027",
-    title: "MARTIAN INGRESS",
+    title: "Colpatria",
     desc: "First uncrewed landing of the heavy-lift habitat modules in the Jezero Crater sector.",
     active: false,
   },
@@ -42,9 +42,9 @@ export default function Timeline() {
     <section ref={containerRef} className="py-24 md:py-40 relative">
       {/* Background line */}
       <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/5 hidden md:block"></div>
-      
+
       {/* Progress line */}
-      <motion.div 
+      <motion.div
         style={{ scaleY, transformOrigin: "top" }}
         className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary-container via-primary-fixed to-transparent hidden md:block z-10"
       ></motion.div>
@@ -55,16 +55,16 @@ export default function Timeline() {
           <p className="text-on-surface-variant text-[10px] md:text-xs font-label uppercase tracking-widest">Phase 4 Deployment: Active</p>
         </div>
 
-        <div className="space-y-24 md:space-y-32">
+        <div className="space-y-12 md:space-y-0 relative">
           {EVENTS.map((event, i) => (
-            <Section 
-              key={event.year} 
-              className={`flex flex-col md:flex-row items-center gap-8 md:gap-12 group`}
+            <Section
+              key={event.year}
+              className="relative grid grid-cols-1 md:grid-cols-2 items-center w-full"
               delay={i * 0.1}
             >
-              {/* Left Content */}
-              <div className={`w-full md:w-1/2 ${i % 2 === 0 ? "md:text-right" : "md:order-2 md:text-left"}`}>
-                <motion.span 
+              {/* Left Column */}
+              <div className={`py-12 md:py-24 w-full ${i % 2 === 0 ? "md:text-right md:pr-20" : "md:order-2 md:text-left md:pl-20"}`}>
+                <motion.span
                   className={`${event.active ? "text-primary-container" : "text-slate-500"} font-headline text-4xl md:text-5xl font-light mb-4 block`}
                 >
                   {event.year}
@@ -77,15 +77,14 @@ export default function Timeline() {
                 </p>
               </div>
 
-              {/* Center Dot */}
-              <div className="relative flex items-center justify-center z-10">
-                <div className={`w-4 h-4 rounded-full transition-all duration-500 ${
-                  event.active ? "bg-primary-container ring-8 ring-primary-container/10 scale-125" : "bg-slate-500 scale-100"
-                }`}></div>
+              {/* Precise Center Dot (Decoupled from Grid flow) */}
+              <div className="md:absolute md:inset-x-0 md:top-1/2 md:-translate-y-1/2 flex items-center justify-center z-20 pointer-events-none">
+                <div className={`w-4 h-4 rounded-full transition-all duration-500 pointer-events-auto ${event.active ? "bg-primary-container ring-8 ring-primary-container/10 scale-125" : "bg-slate-500 scale-100"
+                  }`}></div>
               </div>
 
-              {/* Right Spacer/Opposite */}
-              <div className="hidden md:block md:w-1/2"></div>
+              {/* Right/Opposite Column (Spacer) */}
+              <div className={`hidden md:block md:w-full ${i % 2 === 0 ? "md:order-2" : "md:order-1"}`}></div>
             </Section>
           ))}
         </div>
