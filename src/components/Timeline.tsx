@@ -4,24 +4,25 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { useRef } from "react";
 import Section from "./Section";
 import ParticleBackground from "./animations/ParticleBackground";
+import Image from "next/image";
 
 const EVENTS = [
   {
     year: "2024",
-    title: "LUNAR ARCHWAY",
-    desc: "Establishment of the first permanent automated refueling station in lunar polar orbit.",
+    title: "AGENTE IA & ARQUITECTURA",
+    desc: "Liderazgo en la integración de agentes autónomos y modelos de lenguaje avanzados en ecosistemas empresariales.",
     active: true,
   },
   {
-    year: "2027",
-    title: "Colpatria",
-    desc: "First uncrewed landing of the heavy-lift habitat modules in the Jezero Crater sector.",
+    year: "2022",
+    title: "ESPECIALISTA DEVOPS",
+    desc: "Optimización de ciclos de entrega mediante la automatización de infraestructura (IaC) y pipelines de CI/CD avanzados.",
     active: false,
   },
   {
-    year: "2032",
-    title: "BELT EXPEDITION",
-    desc: "Deployment of resource collection swarms within the Asteroid Belt for deep-space manufacturing.",
+    year: "2019",
+    title: "INGENIERÍA DE SOFTWARE",
+    desc: "Desarrollo de plataformas robustas y escalables con un enfoque en la eficiencia del código y la experiencia del usuario.",
     active: false,
   },
 ];
@@ -40,24 +41,42 @@ export default function Timeline() {
   });
 
   return (
-    <section ref={containerRef} className="py-24 md:py-40 relative overflow-hidden bg-background">
+    <section ref={containerRef} className="relative py-24 md:py-40 overflow-hidden bg-background">
+      {/* Night Sky Background with Scorpius (Clean version, no text) */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Image
+          src="/scorpius-bg.png"
+          alt="Scorpius Constellation"
+          fill
+          className="object-cover opacity-20"
+          priority
+        />
+        {/* Stronger overlay to ensure text legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/40 to-background"></div>
+        <div className="absolute inset-0 bg-black/40"></div>
+      </div>
+
       <ParticleBackground />
-      {/* Background line */}
-      <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/5 hidden md:block"></div>
 
-      {/* Progress line */}
-      <motion.div
-        style={{ scaleY, transformOrigin: "top" }}
-        className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary-container via-primary-fixed to-transparent hidden md:block z-10"
-      ></motion.div>
-
-      <div className="max-w-5xl mx-auto px-6 md:px-10">
+      <div className="max-w-5xl mx-auto px-6 md:px-10 relative z-10">
         <div className="text-center mb-16 md:mb-24">
-          <h2 className="font-orbitron text-3xl md:text-4xl font-bold uppercase tracking-widest mb-4">Operational Roadmap</h2>
-          <p className="text-on-surface-variant text-[10px] md:text-xs font-label uppercase tracking-widest">Phase 4 Deployment: Active</p>
+          <h2 className="font-orbitron text-3xl md:text-5xl font-bold uppercase tracking-widest mb-4">
+            ROADMAP <span className="text-primary-container drop-shadow-[0_0_15px_rgba(0,255,159,0.3)]">PROFESIONAL</span>
+          </h2>
+          <p className="text-on-surface-variant text-[10px] md:text-xs font-label uppercase tracking-widest">
+            Despliegue de fase: Activo
+          </p>
         </div>
 
         <div className="space-y-12 md:space-y-0 relative">
+          {/* Background line (Iniciando después del título) */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/5 hidden md:block"></div>
+
+          {/* Progress line (Iniciando después del título) */}
+          <motion.div
+            style={{ scaleY, transformOrigin: "top" }}
+            className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary-container via-primary-fixed to-transparent hidden md:block z-10"
+          ></motion.div>
           {EVENTS.map((event, i) => (
             <Section
               key={event.year}

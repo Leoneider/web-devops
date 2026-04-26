@@ -18,8 +18,11 @@ const orbitron = Orbitron({
 });
 
 export const metadata: Metadata = {
-  title: "ORBITAL_OS | CELESTIAL OBSERVER",
-  description: "Advanced orbital logistics and deep-space telemetry for the next generation of celestial explorers.",
+  title: "DevOps & AI - Portfolio",
+  description: "Portfolio de Leonardo Saavedra - DevOps & AI",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
@@ -30,9 +33,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${orbitron.variable} dark h-full antialiased`}
+      className={`${inter.variable} ${spaceGrotesk.variable} ${orbitron.variable} dark h-full antialiased relative`}
     >
-      <body className="min-h-full flex flex-col font-body selection:bg-primary-container/30">
+      <body className="min-h-full flex flex-col font-body selection:bg-primary-container/30 relative">
         {children}
       </body>
     </html>
