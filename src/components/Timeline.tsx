@@ -3,6 +3,7 @@
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useRef } from "react";
 import Section from "./Section";
+import ParticleBackground from "./animations/ParticleBackground";
 
 const EVENTS = [
   {
@@ -39,7 +40,8 @@ export default function Timeline() {
   });
 
   return (
-    <section ref={containerRef} className="py-24 md:py-40 relative">
+    <section ref={containerRef} className="py-24 md:py-40 relative overflow-hidden bg-background">
+      <ParticleBackground />
       {/* Background line */}
       <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/5 hidden md:block"></div>
 
@@ -65,11 +67,11 @@ export default function Timeline() {
               {/* Left Column */}
               <div className={`py-12 md:py-24 w-full ${i % 2 === 0 ? "md:text-right md:pr-20" : "md:order-2 md:text-left md:pl-20"}`}>
                 <motion.span
-                  className={`${event.active ? "text-primary-container" : "text-slate-500"} font-headline text-4xl md:text-5xl font-light mb-4 block`}
+                  className={`${event.active ? "text-primary-container" : "text-on-surface-variant/30"} font-headline text-4xl md:text-5xl font-light mb-4 block`}
                 >
                   {event.year}
                 </motion.span>
-                <h5 className={`text-lg md:text-xl font-bold mb-4 uppercase ${event.active ? "text-white" : "text-slate-300"}`}>
+                <h5 className={`text-lg md:text-xl font-bold mb-4 uppercase ${event.active ? "text-white" : "text-on-surface-variant/60"}`}>
                   {event.title}
                 </h5>
                 <p className={`text-on-surface-variant text-sm max-w-sm ${i % 2 === 0 ? "md:ml-auto" : "md:mr-auto"}`}>
@@ -79,7 +81,7 @@ export default function Timeline() {
 
               {/* Precise Center Dot (Decoupled from Grid flow) */}
               <div className="md:absolute md:inset-x-0 md:top-1/2 md:-translate-y-1/2 flex items-center justify-center z-20 pointer-events-none">
-                <div className={`w-4 h-4 rounded-full transition-all duration-500 pointer-events-auto ${event.active ? "bg-primary-container ring-8 ring-primary-container/10 scale-125" : "bg-slate-500 scale-100"
+                <div className={`w-4 h-4 rounded-full transition-all duration-500 pointer-events-auto ${event.active ? "bg-primary-container ring-8 ring-primary-container/10 scale-125" : "bg-outline-variant scale-100"
                   }`}></div>
               </div>
 

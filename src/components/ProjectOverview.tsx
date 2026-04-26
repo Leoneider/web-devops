@@ -14,7 +14,10 @@ const fadeInUp: Variants = {
 
 export default function ProjectOverview() {
   return (
-    <section className="relative w-full overflow-hidden bg-background py-20 px-6 md:px-16">
+    <section className="relative w-full overflow-hidden bg-background pt-32 pb-20 px-6 md:px-16">
+      {/* Top transition fade */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background via-background/80 to-transparent z-20 pointer-events-none"></div>
+
       {/* Hex-pattern overlay usando el color primario del tema */}
       <div
         aria-hidden
@@ -32,6 +35,30 @@ export default function ProjectOverview() {
       />
 
       <div className="relative z-10 mx-auto max-w-6xl">
+        {/* ── Section Title ── */}
+        <div className="flex flex-col items-center text-center mb-20 md:mb-28 pt-10 md:pt-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="mb-4 inline-block px-4 py-1 border border-primary-container/30 bg-primary-container/5 rounded-full"
+          >
+            <span className="text-primary-container font-label text-[10px] md:text-xs tracking-[0.3em] uppercase">
+              Casos de Éxito // Portfolio
+            </span>
+          </motion.div>
+          
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ delay: 0.1 }}
+            className="font-orbitron text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-on-background max-w-3xl"
+          >
+            PROYECTOS <span className="text-primary-container drop-shadow-[0_0_15px_rgba(0,255,159,0.5)]">DESTACADOS</span>
+          </motion.h2>
+        </div>
+
         {/* ── Top: Mockup + Logo/Title ── */}
         <div className="relative flex flex-col items-center gap-16 md:flex-row md:items-center md:gap-10">
 
@@ -51,7 +78,11 @@ export default function ProjectOverview() {
               style={{ background: "var(--color-primary-container)" }}
             />
 
-            <div className="relative w-full max-w-[600px]">
+            <motion.div 
+              animate={{ y: [-10, 10, -10] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-full max-w-[600px]"
+            >
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 16 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
@@ -68,7 +99,7 @@ export default function ProjectOverview() {
                   priority
                 />
               </motion.div>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Right – Logo + título */}

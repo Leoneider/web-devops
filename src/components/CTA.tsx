@@ -2,10 +2,12 @@
 
 import { motion } from "framer-motion";
 import Section from "./Section";
+import GridBackground from "./animations/GridBackground";
 
 export default function CTA() {
   return (
-    <section className="py-24 md:py-40 bg-surface text-center px-6 md:px-10 relative overflow-hidden">
+    <section className="py-24 md:py-40 bg-background text-center px-6 md:px-10 relative overflow-hidden">
+      <GridBackground />
       <div className="absolute inset-0 z-0 flex items-center justify-center opacity-5 select-none pointer-events-none">
         <span className="font-orbitron text-[30vw] md:text-[20vw] font-bold text-primary-container whitespace-nowrap">
           ORBITAL

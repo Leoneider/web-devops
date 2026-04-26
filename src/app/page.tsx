@@ -3,7 +3,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ProjectOverview from "@/components/ProjectOverview";
-import BentoGrid from "@/components/BentoGrid";
+import AiCapabilities from "@/components/AiCapabilities";
 import TechGrid from "@/components/TechGrid";
 import Timeline from "@/components/Timeline";
 import CTA from "@/components/CTA";
@@ -29,7 +29,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <ProjectOverview />
-      <BentoGrid />
+      <AiCapabilities />
       <TechGrid />
       <Timeline />
       <CTA />

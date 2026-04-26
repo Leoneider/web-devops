@@ -13,20 +13,19 @@ export default function Hero() {
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
-  const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
 
   return (
     <section
       ref={targetRef}
-      className="relative h-screen w-full flex items-center justify-center overflow-hidden"
+      className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-background"
     >
       <motion.div
         style={{ scale, y }}
-        className="absolute inset-0 z-0"
+        className="absolute -inset-y-20 inset-x-0 z-0 will-change-transform"
       >
-        <div className="absolute inset-0 bg-slate-950/40 z-10"></div>
-        <div className="absolute inset-0 hero-gradient z-20"></div>
+        <div className="absolute inset-0 bg-background/60 z-10"></div>
         <video
           autoPlay
           loop
@@ -40,6 +39,9 @@ export default function Hero() {
           />
         </video>
       </motion.div>
+
+      {/* Bottom transition fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background to-transparent z-25 pointer-events-none"></div>
 
       <motion.div
         style={{ opacity }}
