@@ -12,9 +12,9 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "5%"]);
 
   return (
     <section
@@ -23,7 +23,7 @@ export default function Hero() {
     >
       <motion.div
         style={{ scale, y }}
-        className="absolute -inset-y-20 inset-x-0 z-0 will-change-transform"
+        className="absolute -inset-y-10 inset-x-0 z-0"
       >
         <div className="absolute inset-0 bg-background/60 z-10"></div>
         <video
