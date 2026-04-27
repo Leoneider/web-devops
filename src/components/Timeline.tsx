@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Section from "./Section";
 import ParticleBackground from "./animations/ParticleBackground";
@@ -40,21 +40,26 @@ export default function Timeline() {
     restDelta: 0.001
   });
 
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
+
   return (
     <section ref={containerRef} className="relative py-24 md:py-40 overflow-hidden bg-background">
-      {/* Night Sky Background with Scorpius (Clean version, no text) */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      {/* Parallax Majestic Space Background */}
+      <motion.div 
+        style={{ y: backgroundY }}
+        className="absolute inset-0 z-0 pointer-events-none scale-110"
+      >
         <Image
-          src="/scorpius-bg.png"
-          alt="Scorpius Constellation"
+          src="/majestic-space-bg.png"
+          alt="Majestic Space Background"
           fill
-          className="object-cover opacity-20"
+          className="object-cover opacity-[0.28] mix-blend-screen"
           priority
         />
-        {/* Stronger overlay to ensure text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/40 to-background"></div>
-        <div className="absolute inset-0 bg-black/40"></div>
-      </div>
+        {/* Gradients for seamless fusion and legibility */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,var(--color-background)_95%)]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
+      </motion.div>
 
       <ParticleBackground />
 
