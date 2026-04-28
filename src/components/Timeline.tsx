@@ -44,20 +44,62 @@ export default function Timeline() {
 
   return (
     <section ref={containerRef} className="relative py-24 md:py-40 overflow-hidden bg-background">
-      {/* Parallax Majestic Space Background */}
-      <motion.div 
+      {/* Dynamic Sci-Fi Parallax Background */}
+      <motion.div
         style={{ y: backgroundY }}
-        className="absolute inset-0 z-0 pointer-events-none scale-110"
+        className="absolute -top-[30%] -bottom-[30%] left-0 right-0 z-0 pointer-events-none overflow-hidden bg-background"
       >
-        <Image
-          src="/majestic-space-bg.png"
-          alt="Majestic Space Background"
-          fill
-          className="object-cover opacity-[0.28] mix-blend-screen"
-          priority
+        {/* Clouds / Cosmic Nebula Overlay */}
+        <motion.div 
+          className="absolute -inset-[100%] opacity-20 mix-blend-color-dodge origin-center"
+          animate={{
+            rotate: [0, 360],
+          }}
+          transition={{ duration: 200, repeat: Infinity, ease: "linear" }}
+        >
+          <svg className="w-full h-full">
+            <filter id="sky-clouds">
+              <feTurbulence type="fractalNoise" baseFrequency="0.002" numOctaves="5" seed="22" />
+              <feColorMatrix type="matrix" values="
+                1 0 0 0 0 
+                0 1 0 0 0 
+                0 0 1 0 0 
+                0 0 0 3.5 -1.5
+              " />
+            </filter>
+            <rect width="100%" height="100%" filter="url(#sky-clouds)" />
+          </svg>
+        </motion.div>
+
+        {/* Animated Cosmic Orbs (Nebula Colors) */}
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-[10%] -left-[10%] w-[60vw] h-[60vw] bg-indigo-600/40 rounded-full blur-[130px] mix-blend-screen pointer-events-none"
         />
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.15, 0.35, 0.15],
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute top-[30%] -right-[10%] w-[50vw] h-[50vw] bg-purple-700/40 rounded-full blur-[130px] mix-blend-screen pointer-events-none"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.4, 1],
+            opacity: [0.1, 0.25, 0.1],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+          className="absolute bottom-0 left-[20%] w-[45vw] h-[45vw] bg-primary-container/20 rounded-full blur-[120px] mix-blend-screen pointer-events-none"
+        />
+
+
         {/* Gradients for seamless fusion and legibility */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,var(--color-background)_95%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--color-background)_90%)]"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
       </motion.div>
 

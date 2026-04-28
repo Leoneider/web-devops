@@ -39,7 +39,7 @@ export default function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
               mass: 0.8,
               restDelta: 0.001
             }}
-            className="fixed inset-y-0 right-0 w-full md:w-[320px] bg-[#0d1117]/80 backdrop-blur-[24px] z-[40] flex flex-col border-l border-white/10 shadow-[-20px_0_60px_rgba(0,0,0,0.8),inset_-20px_0_40px_rgba(255,255,255,0.06),inset_-1px_0_0_rgba(255,255,255,0.1)]"
+            className="fixed inset-y-0 right-0 w-full md:w-[320px] bg-background/90 backdrop-blur-[24px] z-[40] flex flex-col border-l border-white/10 shadow-[-20px_0_60px_rgba(0,0,0,0.8),inset_-20px_0_40px_rgba(255,255,255,0.06),inset_-1px_0_0_rgba(255,255,255,0.1)]"
           >
 
 

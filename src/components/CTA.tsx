@@ -8,15 +8,10 @@ export default function CTA() {
   return (
     <section className="py-24 md:py-40 bg-background text-center px-6 md:px-10 relative overflow-hidden">
       <GridBackground />
-      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-5 select-none pointer-events-none">
-        <span className="font-orbitron text-[30vw] md:text-[20vw] font-bold text-primary-container whitespace-nowrap">
-          CONTACTO
-        </span>
-      </div>
 
       <Section className="relative z-10 max-w-4xl mx-auto">
         <h2 className="font-orbitron text-4xl md:text-6xl font-bold mb-8 md:mb-10 leading-tight">
-          ¿LISTO PARA TRANSFORMAR <span className="text-primary-container">TU PROYECTO?</span>
+          ¿LISTO PARA EMPEZAR <span className="text-primary-container">TU PROYECTO?</span>
         </h2>
         <p className="text-on-surface-variant max-w-xl mx-auto mb-10 md:mb-12 text-sm md:text-base leading-relaxed">
           Estoy disponible para nuevas colaboraciones y proyectos desafiantes.
