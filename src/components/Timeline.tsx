@@ -8,21 +8,45 @@ import Image from "next/image";
 
 const EVENTS = [
   {
-    year: "2024",
-    title: "AGENTE IA & ARQUITECTURA",
-    desc: "Liderazgo en la integración de agentes autónomos y modelos de lenguaje avanzados en ecosistemas empresariales.",
+    year: "2025",
+    title: "HTECH",
+    desc: "Soporte y mantenimiento para plataformas de Papa John's en Centroamérica.",
     active: true,
   },
   {
-    year: "2022",
-    title: "ESPECIALISTA DEVOPS",
-    desc: "Optimización de ciclos de entrega mediante la automatización de infraestructura (IaC) y pipelines de CI/CD avanzados.",
+    year: "2024",
+    title: "BANCOLOMBIA & TICNOW",
+    desc: "Desarrollo en sistema de listas restrictivas (Bancolombia) y validación de flujos de usuario para Daviplata usando Facetec y Regula (Ticnow).",
     active: false,
   },
   {
-    year: "2019",
-    title: "INGENIERÍA DE SOFTWARE",
-    desc: "Desarrollo de plataformas robustas y escalables con un enfoque en la eficiencia del código y la experiencia del usuario.",
+    year: "2023",
+    title: "COGNITS",
+    desc: "Desarrollo y consultoría en ingeniería de software.",
+    active: false,
+  },
+  {
+    year: "2022",
+    title: "SIIGO",
+    desc: "Arquitecto Frontend liderando el desarrollo de arquitectura de microfrontends y monorepos utilizando NX.",
+    active: false,
+  },
+  {
+    year: "2021",
+    title: "CEIBA",
+    desc: "Proveedor tecnológico para Scotiabank en proyectos clave del sector asegurador.",
+    active: false,
+  },
+  {
+    year: "2020",
+    title: "WPOSS",
+    desc: "Desarrollo e implementación de un sistema integral para la administración de datáfonos.",
+    active: false,
+  },
+  {
+    year: "2015",
+    title: "CREDISERVIR",
+    desc: "Diseño y estructuración de la aplicación móvil para la entidad financiera.",
     active: false,
   },
 ];
