@@ -345,12 +345,7 @@ export default function TechGrid() {
                   ))}
                 </div>
 
-                <a 
-                  href="#" 
-                  className="text-primary-container text-[10px] font-bold tracking-widest uppercase flex items-center gap-2 group-hover:gap-4 transition-all relative z-10 mt-auto"
-                >
-                  Initialize Module <ArrowRight className="w-3 h-3" />
-                </a>
+
                 
                 {/* Dynamic Glow Effect */}
                 <div className={`absolute top-0 right-0 w-32 h-32 bg-primary-container/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 transition-colors duration-500 ${card.glowColor}`}></div>
