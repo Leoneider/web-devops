@@ -78,7 +78,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="es-CO"
       className={`${inter.variable} ${spaceGrotesk.variable} ${orbitron.variable} dark h-full antialiased relative`}
     >
       <body className="min-h-full flex flex-col font-body selection:bg-primary-container/30 relative">
