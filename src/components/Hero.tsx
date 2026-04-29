@@ -18,6 +18,7 @@ export default function Hero() {
 
   return (
     <section
+      id="hero"
       ref={targetRef}
       className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-background"
     >
@@ -106,6 +107,7 @@ export default function Hero() {
           </motion.a>
 
           <button
+            onClick={() => document.getElementById('tech-stack')?.scrollIntoView({ behavior: 'smooth' })}
             className="inline-flex items-center justify-center rounded-xl border border-primary-container/30 bg-transparent px-8 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white transition-all hover:border-primary-container/60 hover:bg-primary-container/5 hover:shadow-[0_0_15px_rgba(0,255,159,0.1)] active:scale-95"
           >
             <span>Stack Tecnológico</span>

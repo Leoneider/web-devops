@@ -9,13 +9,23 @@ interface CommandMenuProps {
 }
 
 const MENU_ITEMS = [
-  "MISSION CONTROL",
-  "CREW MANIFEST",
-  "CARGO LOG",
-  "EMERGENCY PROTOCOLS",
+  { label: "INICIO", targetId: "hero" },
+  { label: "PROYECTOS", targetId: "projects" },
+  { label: "CAPACIDADES IA", targetId: "ai-capabilities" },
+  { label: "STACK TECNOLÓGICO", targetId: "tech-stack" },
+  { label: "ROADMAP PROFESIONAL", targetId: "roadmap" },
+  { label: "CONTACTO", targetId: "cta" },
 ];
 
 export default function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    onClose();
+    setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    }, 300);
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -52,15 +62,16 @@ export default function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
               <nav className="flex flex-col gap-10">
                 {MENU_ITEMS.map((item, i) => (
                   <motion.a
-                    key={item}
-                    href="#"
+                    key={item.targetId}
+                    href={`#${item.targetId}`}
+                    onClick={(e) => scrollToSection(e, item.targetId)}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 + i * 0.1 }}
                     className="flex justify-between items-center group cursor-pointer"
                   >
                     <span className="font-orbitron text-[15px] text-slate-300 group-hover:text-primary-container transition-colors tracking-wide">
-                      {item}
+                      {item.label}
                     </span>
                     <ChevronRight className="w-5 h-5 text-slate-600 group-hover:text-primary-container group-hover:translate-x-1 transition-all" />
                   </motion.a>

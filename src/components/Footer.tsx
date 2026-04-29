@@ -10,7 +10,7 @@ export default function Footer() {
         </div>
         
         <div className="text-on-surface-variant font-label text-[10px] md:text-xs tracking-[0.2rem] uppercase">
-          © 2026 DEVOPS42.
+          © 2026
         </div>
       </div>
     </footer>

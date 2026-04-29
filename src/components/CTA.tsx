@@ -6,7 +6,8 @@ import GridBackground from "./animations/GridBackground";
 
 export default function CTA() {
   return (
-    <section className="py-24 md:py-40 bg-background text-center px-6 md:px-10 relative overflow-hidden">
+    <section id="cta" className="py-24 md:py-40 bg-background text-center px-6 md:px-10 relative overflow-hidden">
+      <GridBackground />
       <GridBackground />
 
       <Section className="relative z-10 max-w-4xl mx-auto">

@@ -67,14 +67,14 @@ export default function Timeline() {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
 
   return (
-    <section ref={containerRef} className="relative py-24 md:py-40 overflow-hidden bg-background">
+    <section id="roadmap" ref={containerRef} className="relative py-24 md:py-40 overflow-hidden bg-background">
       {/* Dynamic Sci-Fi Parallax Background */}
       <motion.div
         style={{ y: backgroundY }}
         className="absolute -top-[30%] -bottom-[30%] left-0 right-0 z-0 pointer-events-none overflow-hidden bg-background"
       >
         {/* Clouds / Cosmic Nebula Overlay */}
-        <motion.div 
+        <motion.div
           className="absolute -inset-[100%] opacity-20 mix-blend-color-dodge origin-center"
           animate={{
             rotate: [0, 360],
@@ -134,9 +134,6 @@ export default function Timeline() {
           <h2 className="font-orbitron text-3xl md:text-5xl font-bold uppercase tracking-widest mb-4">
             ROADMAP <span className="text-primary-container drop-shadow-[0_0_15px_rgba(0,255,159,0.3)]">PROFESIONAL</span>
           </h2>
-          <p className="text-on-surface-variant text-[10px] md:text-xs font-label uppercase tracking-widest">
-            Despliegue de fase: Activo
-          </p>
         </div>
 
         <div className="space-y-12 md:space-y-0 relative">

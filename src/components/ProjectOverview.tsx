@@ -14,7 +14,7 @@ const fadeInUp: Variants = {
 
 export default function ProjectOverview() {
   return (
-    <section className="relative w-full overflow-hidden bg-background pt-32 pb-20 px-6 md:px-16">
+    <section id="projects" className="relative w-full overflow-hidden bg-background pt-12 pb-20 px-6 md:px-16">
       {/* Top transition fade */}
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background via-background/80 to-transparent z-20 pointer-events-none"></div>
 
@@ -36,7 +36,7 @@ export default function ProjectOverview() {
 
       <div className="relative z-10 mx-auto max-w-6xl">
         {/* ── Section Title ── */}
-        <div className="flex flex-col items-center text-center mb-20 md:mb-28 pt-10 md:pt-16">
+        <div className="flex flex-col items-center text-center mb-12 md:mb-12 pt-10 md:pt-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -47,8 +47,8 @@ export default function ProjectOverview() {
               Casos de Éxito // Portfolio
             </span>
           </motion.div>
-          
-          <motion.h2 
+
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -78,7 +78,7 @@ export default function ProjectOverview() {
               style={{ background: "var(--color-primary-container)" }}
             />
 
-            <motion.div 
+            <motion.div
               animate={{ y: [-10, 10, -10] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               className="relative w-full max-w-[600px]"
@@ -132,50 +132,21 @@ export default function ProjectOverview() {
               style={{ background: "rgba(0,255,159,0.2)" }}
             />
 
-            <p
-              className="text-xs md:text-sm font-bold tracking-[0.25em] uppercase"
-              style={{ color: "var(--color-on-surface-variant)" }}
-            >
-              Resumen del Proyecto
-            </p>
+            <div className="flex flex-col items-center md:items-start gap-2">
+              <p
+                className="text-xs md:text-sm font-bold tracking-[0.25em] uppercase"
+                style={{ color: "var(--color-on-surface-variant)" }}
+              >
+                Resumen del Proyecto
+              </p>
+              <p className="text-on-surface-variant text-sm leading-relaxed max-w-sm text-center md:text-left">
+                Plataforma de gestión financiera centralizada diseñada para automatizar procesos contables y optimizar la administración diaria de múltiples franquicias.
+              </p>
+            </div>
           </motion.div>
         </div>
 
-        {/* ── Divider ── */}
-        <div
-          className="my-14 h-px"
-          style={{ background: "var(--color-outline-variant)" }}
-        />
 
-        {/* ── Descripción en dos columnas ── */}
-        <div className="grid gap-6 md:grid-cols-2 md:gap-12">
-          <motion.p
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={2}
-            className="text-on-surface-variant text-sm md:text-base leading-relaxed"
-          >
-            Este fue un proyecto para una plataforma de gestión financiera diseñada para grandes
-            franquicias en industrias como comida rápida y restaurantes, ayudándolas a automatizar
-            procesos contables y gestionar múltiples locales de manera más eficiente.
-          </motion.p>
-
-          <motion.p
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={3}
-            className="text-on-surface-variant text-sm md:text-base leading-relaxed"
-          >
-            El objetivo era diseñar una interfaz intuitiva que redujera la complejidad en la gestión
-            de datos financieros, optimizando las operaciones diarias de los dueños de franquicias.
-            El reto principal fue garantizar que la plataforma pudiera escalar a múltiples locales
-            manteniendo una experiencia de usuario consistente y precisión en los reportes financieros.
-          </motion.p>
-        </div>
       </div>
     </section>
   );
