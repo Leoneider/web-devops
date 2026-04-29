@@ -138,12 +138,12 @@ export default function Timeline() {
 
         <div className="space-y-12 md:space-y-0 relative">
           {/* Background line (Iniciando después del título) */}
-          <div className="absolute left-1/2 top-0 -bottom-24 md:-bottom-40 w-px bg-white/5 hidden md:block"></div>
+          <div className="absolute left-4 md:left-1/2 top-0 -bottom-24 md:-bottom-40 w-px bg-white/5"></div>
 
           {/* Progress line (Iniciando después del título) */}
           <motion.div
             style={{ scaleY, transformOrigin: "top" }}
-            className="absolute left-1/2 top-0 -bottom-24 md:-bottom-40 w-px bg-gradient-to-b from-primary-container via-primary-fixed to-transparent hidden md:block z-10"
+            className="absolute left-4 md:left-1/2 top-0 -bottom-24 md:-bottom-40 w-px bg-gradient-to-b from-primary-container via-primary-fixed to-transparent z-10"
           ></motion.div>
           {EVENTS.map((event, i) => (
             <Section
@@ -152,7 +152,7 @@ export default function Timeline() {
               delay={i * 0.1}
             >
               {/* Left Column */}
-              <div className={`py-12 md:py-24 w-full ${i % 2 === 0 ? "md:text-right md:pr-20" : "md:order-2 md:text-left md:pl-20"}`}>
+              <div className={`py-12 md:py-24 w-full ${i % 2 === 0 ? "pl-14 md:pl-0 md:text-right md:pr-20" : "pl-14 md:order-2 md:text-left md:pl-20"}`}>
                 <motion.span
                   className={`${event.active ? "text-primary-container" : "text-on-surface-variant/30"} font-headline text-4xl md:text-5xl font-light mb-4 block`}
                 >
@@ -167,7 +167,7 @@ export default function Timeline() {
               </div>
 
               {/* Precise Center Dot (Decoupled from Grid flow) */}
-              <div className="md:absolute md:inset-x-0 md:top-1/2 md:-translate-y-1/2 flex items-center justify-center z-20 pointer-events-none">
+              <div className="absolute left-4 md:left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 flex items-center justify-center z-20 pointer-events-none">
                 <div className={`w-4 h-4 rounded-full transition-all duration-500 pointer-events-auto ${event.active ? "bg-primary-container ring-8 ring-primary-container/10 scale-125" : "bg-outline-variant scale-100"
                   }`}></div>
               </div>
