@@ -19,7 +19,7 @@ const orbitron = Orbitron({
 
 export const metadata: Metadata = {
   title: "DevOps & AI - Portfolio",
-  description: "Portfolio de Leonardo Saavedra - DevOps & AI",
+  description: "Portfolio de Leoneider Trigos - DevOps & AI",
   icons: {
     icon: "/favicon.png",
   },
