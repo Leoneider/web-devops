@@ -10,43 +10,43 @@ const EVENTS = [
   {
     year: "2025",
     title: "HTECH",
-    desc: "Soporte y mantenimiento para plataformas de Papa John's en Centroamérica.",
+    desc: "Soporte y mantenimiento para plataformas de Papa John's en Centroamérica. Optimización de tiempos de respuesta y mejoras continuas en la experiencia de usuario del e-commerce.",
     active: true,
   },
   {
     year: "2024",
     title: "BANCOLOMBIA & TICNOW",
-    desc: "Desarrollo en sistema de listas restrictivas (Bancolombia) y validación de flujos de usuario para Daviplata usando Facetec y Regula (Ticnow).",
+    desc: "Desarrollo en sistema de listas restrictivas (Bancolombia) y validación de flujos con biometría para Daviplata (Ticnow), mejorando la seguridad en procesos de onboarding.",
     active: false,
   },
   {
     year: "2023",
     title: "COGNITS",
-    desc: "Desarrollo y consultoría en ingeniería de software.",
+    desc: "Desarrollo y consultoría de software para clientes internacionales, diseñando arquitecturas escalables en la nube y liderando la adopción de nuevas tecnologías.",
     active: false,
   },
   {
     year: "2022",
     title: "SIIGO",
-    desc: "Arquitecto Frontend liderando el desarrollo de arquitectura de microfrontends y monorepos utilizando NX.",
+    desc: "Arquitecto Frontend liderando el desarrollo de microfrontends con NX. Estandarización de componentes UI, reduciendo tiempos de compilación y mejorando la experiencia de desarrollo.",
     active: false,
   },
   {
     year: "2021",
     title: "CEIBA",
-    desc: "Proveedor tecnológico para Scotiabank en proyectos clave del sector asegurador.",
+    desc: "Proveedor tecnológico para Scotiabank en el sector asegurador. Automatización de procesos operativos y desarrollo de interfaces centradas en el usuario.",
     active: false,
   },
   {
     year: "2020",
     title: "WPOSS",
-    desc: "Desarrollo e implementación de un sistema integral para la administración de datáfonos.",
+    desc: "Desarrollo de un sistema integral para administración de datáfonos, creando módulos de monitoreo en tiempo real y optimizando consultas a bases de datos.",
     active: false,
   },
   {
     year: "2015",
     title: "CREDISERVIR",
-    desc: "Diseño y estructuración de la aplicación móvil para la entidad financiera.",
+    desc: "Diseño y estructuración de la aplicación móvil financiera. Definición de flujos de navegación intuitivos y validación de prototipos interactivos con usuarios.",
     active: false,
   },
 ];
@@ -138,12 +138,12 @@ export default function Timeline() {
 
         <div className="space-y-12 md:space-y-0 relative">
           {/* Background line (Iniciando después del título) */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/5 hidden md:block"></div>
+          <div className="absolute left-1/2 top-0 -bottom-24 md:-bottom-40 w-px bg-white/5 hidden md:block"></div>
 
           {/* Progress line (Iniciando después del título) */}
           <motion.div
             style={{ scaleY, transformOrigin: "top" }}
-            className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary-container via-primary-fixed to-transparent hidden md:block z-10"
+            className="absolute left-1/2 top-0 -bottom-24 md:-bottom-40 w-px bg-gradient-to-b from-primary-container via-primary-fixed to-transparent hidden md:block z-10"
           ></motion.div>
           {EVENTS.map((event, i) => (
             <Section

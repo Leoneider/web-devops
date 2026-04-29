@@ -79,17 +79,6 @@ export default function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
               </nav>
             </div>
 
-            {/* Footer Area */}
-            <div className="p-8 pb-10 border-t border-white/5">
-              <div className="h-[1px] w-full bg-white/5 mb-10" />
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full py-4 bg-primary-container text-black font-orbitron font-bold uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(0,255,159,0.3)] hover:shadow-[0_0_40px_rgba(0,255,159,0.5)] transition-all text-xs rounded-sm"
-              >
-                INITIATE_DOCKING
-              </motion.button>
-            </div>
           </motion.div>
         </>
       )}
