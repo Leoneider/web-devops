@@ -40,11 +40,20 @@ export const metadata: Metadata = {
     title: "Leoneider Trigos | DevOps & AI Engineer",
     description: "Portfolio de Leoneider Trigos - DevOps & AI Engineer especializado en soluciones escalables e inteligencia artificial.",
     siteName: "Leoneider Trigos Portfolio",
+    images: [
+      {
+        url: "/devopsheader.png",
+        width: 1200,
+        height: 630,
+        alt: "Leoneider Trigos | DevOps & AI Engineer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Leoneider Trigos | DevOps & AI Engineer",
     description: "Portfolio de Leoneider Trigos - DevOps & AI Engineer especializado en soluciones escalables e inteligencia artificial.",
+    images: ["/devopsheader.png"],
   },
   icons: {
     icon: "/favicon.png",
