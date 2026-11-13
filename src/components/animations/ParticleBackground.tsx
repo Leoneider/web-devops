@@ -1,49 +1,36 @@
-"use client";
+import { seededRandom, round2 } from "@/lib/random";
 
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+const rand = seededRandom(42);
+
+// Star-like particles. Generated once with a seeded PRNG, animated in CSS
+// (see `bg-twinkle` in globals.css) so no JS runs per frame.
+const PARTICLES = Array.from({ length: 70 }, (_, i) => {
+  const size = round2(rand() * 1.5 + 0.5);
+  return {
+    id: i,
+    x: round2(rand() * 100),
+    y: round2(rand() * 100),
+    size,
+    duration: round2(rand() * 40 + 20),
+    delay: round2(rand() * 10),
+  };
+});
 
 export default function ParticleBackground() {
-  const [particles, setParticles] = useState<{ id: number; x: number; y: number; size: number; duration: number; delay: number }[]>([]);
-
-  useEffect(() => {
-    // Generate particles only on the client side to prevent hydration mismatches
-    const generatedParticles = Array.from({ length: 70 }).map((_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 1.5 + 0.5, // Smaller like stars
-      duration: Math.random() * 40 + 20, // Much slower drifting
-      delay: Math.random() * 10,
-    }));
-    setParticles(generatedParticles);
-  }, []);
-
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 mix-blend-screen">
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="absolute bg-white rounded-full"
+    <div aria-hidden="true" className="absolute inset-0 overflow-hidden pointer-events-none z-0 mix-blend-screen">
+      {PARTICLES.map((p) => (
+        <div
+          key={p.id}
+          className="bg-twinkle absolute bg-white rounded-full"
           style={{
-            width: particle.size,
-            height: particle.size,
-            left: `${particle.x}%`,
-            top: `${particle.y}%`,
-            // White glow suitable for stars
-            boxShadow: `0 0 ${particle.size * 5}px ${particle.size * 1.5}px rgba(255, 255, 255, 0.8)`,
-          }}
-          animate={{
-            y: ["0%", "-30%"], // Very subtle upward drift
-            // Twinkling effect: pulsing opacity unpredictably
-            opacity: [0, 0.2, 0.9, 0.1, 0.7, 1, 0.3, 0],
-            scale: [1, 1.3, 0.8, 1.5, 0.9, 1.2, 1],
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: particle.delay,
+            width: p.size,
+            height: p.size,
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            boxShadow: `0 0 ${round2(p.size * 5)}px ${round2(p.size * 1.5)}px rgba(255, 255, 255, 0.8)`,
+            animationDuration: `${p.duration}s`,
+            animationDelay: `${p.delay}s`,
           }}
         />
       ))}

@@ -1,66 +1,49 @@
-"use client";
+import { seededRandom, round2 } from "@/lib/random";
 
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+const rand = seededRandom(1337);
+
+const NODES = Array.from({ length: 30 }, (_, i) => ({
+  id: i,
+  x: round2(rand() * 100),
+  y: round2(rand() * 100),
+  durations: [round2(rand() * 5 + 5), round2(rand() * 5 + 5), round2(rand() * 5 + 5)],
+  delays: [round2(rand() * 5), round2(rand() * 5), round2(rand() * 5)],
+  nodeDuration: round2(rand() * 2 + 2),
+}));
 
 export default function NetworkBackground() {
-  const [nodes, setNodes] = useState<{ 
-    id: number; 
-    x: number; 
-    y: number; 
-    durations: number[]; 
-    delays: number[];
-    nodeDuration: number;
-  }[]>([]);
-
-  useEffect(() => {
-    // Generate nodes
-    const generatedNodes = Array.from({ length: 30 }).map((_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      durations: [Math.random() * 5 + 5, Math.random() * 5 + 5, Math.random() * 5 + 5],
-      delays: [Math.random() * 5, Math.random() * 5, Math.random() * 5],
-      nodeDuration: Math.random() * 2 + 2,
-    }));
-    setNodes(generatedNodes);
-  }, []);
-
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-20">
+    <div aria-hidden="true" className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-20">
       <svg className="absolute inset-0 w-full h-full">
-        {nodes.map((node, i) => (
-          nodes.slice(i + 1, i + 4).map((target, j) => (
-            <motion.line
+        {NODES.map((node, i) =>
+          NODES.slice(i + 1, i + 4).map((target, j) => (
+            <line
               key={`${i}-${j}`}
+              className="bg-link"
               x1={`${node.x}%`}
               y1={`${node.y}%`}
               x2={`${target.x}%`}
               y2={`${target.y}%`}
+              pathLength={1}
               stroke="var(--color-primary-container)"
               strokeWidth="0.5"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ 
-                pathLength: [0, 1, 0], 
-                opacity: [0, 0.5, 0] 
-              }}
-              transition={{
-                duration: node.durations[j],
-                repeat: Infinity,
-                ease: "linear",
-                delay: node.delays[j],
+              style={{
+                animationDuration: `${node.durations[j]}s`,
+                animationDelay: `${node.delays[j]}s`,
               }}
             />
           ))
-        ))}
+        )}
       </svg>
-      {nodes.map((node) => (
-        <motion.div
+      {NODES.map((node) => (
+        <div
           key={node.id}
-          className="absolute w-1 h-1 bg-primary-container rounded-full"
-          style={{ left: `${node.x}%`, top: `${node.y}%` }}
-          animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.8, 0.3] }}
-          transition={{ duration: node.nodeDuration, repeat: Infinity }}
+          className="bg-node absolute w-1 h-1 bg-primary-container rounded-full"
+          style={{
+            left: `${node.x}%`,
+            top: `${node.y}%`,
+            animationDuration: `${node.nodeDuration}s`,
+          }}
         />
       ))}
     </div>

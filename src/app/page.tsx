@@ -1,5 +1,3 @@
-"use client";
-
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ProjectOverview from "@/components/ProjectOverview";
@@ -8,44 +6,50 @@ import TechGrid from "@/components/TechGrid";
 import Timeline from "@/components/Timeline";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
-import { motion, useScroll, useSpring } from "framer-motion";
+import ScrollProgress from "@/components/ScrollProgress";
+import { SITE_URL } from "@/lib/site";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Leoneider Trigos",
+  alternateName: "DevOps42",
+  jobTitle: "DevOps & AI Engineer",
+  description:
+    "DevOps & AI Engineer especializado en soluciones escalables, arquitectura en la nube e inteligencia artificial.",
+  url: `${SITE_URL}/`,
+  image: `${SITE_URL}/og-image.jpg`,
+  knowsAbout: [
+    "DevOps",
+    "Inteligencia Artificial",
+    "Cloud Architecture",
+    "AWS",
+    "Next.js",
+    "Angular",
+    "Spring Boot",
+  ],
+};
 
 export default function Home() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Leoneider Trigos",
-    jobTitle: "DevOps & AI Engineer",
-    url: "https://www.devops42.dev/",
-  };
-
   return (
-    <main className="relative min-h-screen bg-background text-on-surface">
+    <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
       />
-      {/* Global Scroll Progress Bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-primary-container z-[60] origin-left"
-        style={{ scaleX }}
-      />
-      
+      <ScrollProgress />
       <Navbar />
-      <Hero />
-      <ProjectOverview />
-      <AiCapabilities />
-      <TechGrid />
-      <Timeline />
-      <CTA />
+      <main className="relative min-h-screen bg-background text-on-surface">
+        <Hero />
+        <ProjectOverview />
+        <AiCapabilities />
+        <TechGrid />
+        <Timeline />
+        <CTA />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

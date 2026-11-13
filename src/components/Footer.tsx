@@ -1,5 +1,3 @@
-import { motion } from "framer-motion";
-
 export default function Footer() {
   return (
     <footer className="bg-background border-t border-primary-container/10 py-12 w-full mt-auto">
@@ -10,7 +8,7 @@ export default function Footer() {
         </div>
         
         <div className="text-on-surface-variant font-label text-[10px] md:text-xs tracking-[0.2rem] uppercase">
-          © 2026
+          © {new Date().getFullYear()} Leoneider Trigos
         </div>
       </div>
     </footer>

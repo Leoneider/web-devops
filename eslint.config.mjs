@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Separate legacy Vite project with its own ESLint config.
+    "web-react/**",
   ]),
 ]);
 

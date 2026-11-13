@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk, Orbitron } from "next/font/google";
 import "./globals.css";
+import MotionProvider from "@/components/MotionProvider";
+import { SITE_URL } from "@/lib/site";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -20,11 +22,11 @@ const orbitron = Orbitron({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#020617", // Default slate-950/black color often used in dark mode
+  themeColor: "#0a1410",
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.devops42.dev"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Leoneider Trigos | DevOps & AI Engineer",
     template: "%s | Leoneider Trigos"
@@ -42,7 +44,7 @@ export const metadata: Metadata = {
     siteName: "Leoneider Trigos Portfolio",
     images: [
       {
-        url: "/devopsheader.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Leoneider Trigos | DevOps & AI Engineer",
@@ -53,10 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Leoneider Trigos | DevOps & AI Engineer",
     description: "Portfolio de Leoneider Trigos - DevOps & AI Engineer especializado en soluciones escalables e inteligencia artificial.",
-    images: ["/devopsheader.png"],
-  },
-  icons: {
-    icon: "/favicon.png",
+    images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
@@ -79,10 +78,11 @@ export default function RootLayout({
   return (
     <html
       lang="es-CO"
+      data-scroll-behavior="smooth"
       className={`${inter.variable} ${spaceGrotesk.variable} ${orbitron.variable} dark h-full antialiased relative`}
     >
       <body className="min-h-full flex flex-col font-body selection:bg-primary-container/30 relative">
-        {children}
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );

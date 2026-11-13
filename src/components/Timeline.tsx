@@ -4,7 +4,6 @@ import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Section from "./Section";
 import ParticleBackground from "./animations/ParticleBackground";
-import Image from "next/image";
 
 const EVENTS = [
   {

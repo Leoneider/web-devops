@@ -25,33 +25,29 @@ export default function AiTerminal() {
   const [displayedLines, setDisplayedLines] = useState<string[]>([]);
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
-  const [isComplete, setIsComplete] = useState(false);
+  const isComplete = currentLineIndex >= TERMINAL_STEPS.length;
 
   useEffect(() => {
     if (isComplete) return;
 
-    if (currentLineIndex < TERMINAL_STEPS.length) {
-      const currentFullLine = TERMINAL_STEPS[currentLineIndex];
+    const currentFullLine = TERMINAL_STEPS[currentLineIndex];
 
-      if (currentCharIndex < currentFullLine.length) {
-        // Typing effect for the current line
-        const timeout = setTimeout(() => {
-          setCurrentCharIndex(prev => prev + 1);
-        }, Math.random() * 20 + 10); // Random typing speed
+    if (currentCharIndex < currentFullLine.length) {
+      // Typing effect for the current line
+      const timeout = setTimeout(() => {
+        setCurrentCharIndex(prev => prev + 1);
+      }, Math.random() * 20 + 10); // Random typing speed
 
-        return () => clearTimeout(timeout);
-      } else {
-        // Line finished typing, move to next line after a short pause
-        const timeout = setTimeout(() => {
-          setDisplayedLines(prev => [...prev, currentFullLine]);
-          setCurrentLineIndex(prev => prev + 1);
-          setCurrentCharIndex(0);
-        }, 400);
-
-        return () => clearTimeout(timeout);
-      }
+      return () => clearTimeout(timeout);
     } else {
-      setIsComplete(true);
+      // Line finished typing, move to next line after a short pause
+      const timeout = setTimeout(() => {
+        setDisplayedLines(prev => [...prev, currentFullLine]);
+        setCurrentLineIndex(prev => prev + 1);
+        setCurrentCharIndex(0);
+      }, 400);
+
+      return () => clearTimeout(timeout);
     }
   }, [currentLineIndex, currentCharIndex, isComplete]);
 

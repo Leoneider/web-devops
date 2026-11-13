@@ -1,5 +1,6 @@
 "use client";
 
+import { Fragment } from "react";
 import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
 
@@ -11,6 +12,155 @@ const fadeInUp: Variants = {
     transition: { duration: 0.6, delay: i * 0.15, ease: "easeOut" as const },
   }),
 };
+
+interface Project {
+  titleTop: string;
+  titleBottom: string;
+  description: string;
+  image: { src: string; alt: string; width: number; height: number };
+  /** "wide" fills the column; "portrait" is height-constrained (phone mockups). */
+  imageShape: "wide" | "portrait";
+  /** Text on the left, image on the right (desktop). */
+  reversed: boolean;
+  floatDelay: number;
+}
+
+const PROJECTS: Project[] = [
+  {
+    titleTop: "BACK",
+    titleBottom: "OFFICE",
+    description:
+      "Plataforma de gestión financiera centralizada diseñada para automatizar procesos contables y optimizar la administración diaria de múltiples franquicias.",
+    image: {
+      src: "/bo.png",
+      alt: "SAR Back Office – Plataforma de Gestión Financiera",
+      width: 1084,
+      height: 590,
+    },
+    imageShape: "wide",
+    reversed: false,
+    floatDelay: 0,
+  },
+  {
+    titleTop: "APP",
+    titleBottom: "FINANCIERA",
+    description:
+      "Solución móvil intuitiva diseñada para la autogestión financiera. Facilita la consulta de saldos, ejecución de pagos, transferencias seguras y apertura de nuevos productos, optimizando la experiencia digital del usuario.",
+    image: { src: "/app-coop.png", alt: "App Financiera", width: 444, height: 663 },
+    imageShape: "portrait",
+    reversed: true,
+    floatDelay: 1,
+  },
+  {
+    titleTop: "PAPA",
+    titleBottom: "JOHNS",
+    description:
+      "Soporte técnico y mantenimiento de la plataforma web y móvil de pedidos en línea para las operaciones en Guatemala, Panamá y Costa Rica. Asegurando la estabilidad del sistema y un flujo de compra continuo.",
+    image: {
+      src: "/pj-project.png",
+      alt: "Papa Johns – Plataforma de Pedidos",
+      width: 1104,
+      height: 1428,
+    },
+    imageShape: "portrait",
+    reversed: false,
+    floatDelay: 0.5,
+  },
+];
+
+function ProjectRow({ project }: { project: Project }) {
+  const { image, reversed } = project;
+  const isWide = project.imageShape === "wide";
+
+  return (
+    <article
+      className={`relative flex flex-col items-center gap-16 md:items-center ${
+        reversed ? "md:flex-row-reverse md:justify-center md:gap-24" : "md:flex-row md:gap-10"
+      }`}
+    >
+      {/* Imagen real del proyecto */}
+      <motion.div
+        variants={fadeInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        custom={0}
+        className={`relative flex justify-center ${reversed ? "" : "flex-1"}`}
+      >
+        {/* Glow verde ambiental detrás de la imagen */}
+        <div
+          aria-hidden
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full blur-3xl opacity-20 pointer-events-none"
+          style={{ background: "var(--color-primary-container)" }}
+        />
+
+        <motion.div
+          animate={{ y: [-10, 10, -10] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: project.floatDelay }}
+          className="relative w-full max-w-[600px]"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 16 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative rounded-2xl overflow-hidden"
+          >
+            <Image
+              src={image.src}
+              alt={image.alt}
+              width={image.width}
+              height={image.height}
+              sizes={isWide ? "(min-width: 768px) 600px, 100vw" : "350px"}
+              className={
+                isWide
+                  ? "w-full h-auto object-contain"
+                  : "h-[350px] md:h-[450px] w-auto mx-auto object-contain drop-shadow-2xl"
+              }
+            />
+          </motion.div>
+        </motion.div>
+      </motion.div>
+
+      {/* Título + resumen */}
+      <motion.div
+        variants={fadeInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        custom={1}
+        className={`flex flex-col items-center gap-4 flex-shrink-0 ${
+          reversed ? "md:items-end" : "md:items-start"
+        }`}
+      >
+        <h3
+          className={`text-4xl md:text-5xl font-black tracking-tight leading-none text-center ${
+            reversed ? "md:text-right" : "md:text-left"
+          }`}
+        >
+          <span className="block text-on-surface">{project.titleTop}</span>
+          <span className="block text-primary-container">{project.titleBottom}</span>
+        </h3>
+
+        {/* Divider */}
+        <div className="h-px w-full bg-primary-container/20" />
+
+        <div className={`flex flex-col items-center gap-2 ${reversed ? "md:items-end" : "md:items-start"}`}>
+          <p className="text-xs md:text-sm font-bold tracking-[0.25em] uppercase text-on-surface-variant">
+            Resumen del Proyecto
+          </p>
+          <p
+            className={`text-on-surface-variant text-sm leading-relaxed max-w-sm text-center ${
+              reversed ? "md:text-right" : "md:text-left"
+            }`}
+          >
+            {project.description}
+          </p>
+        </div>
+      </motion.div>
+    </article>
+  );
+}
 
 export default function ProjectOverview() {
   return (
@@ -59,271 +209,14 @@ export default function ProjectOverview() {
           </motion.h2>
         </div>
 
-        {/* ── Top: Mockup + Logo/Title ── */}
-        <div className="relative flex flex-col items-center gap-16 md:flex-row md:items-center md:gap-10">
-
-          {/* Left – imagen real del proyecto */}
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={0}
-            className="relative flex-1 flex justify-center"
-          >
-            {/* Glow verde ambiental detrás de la imagen */}
-            <div
-              aria-hidden
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full blur-3xl opacity-20 pointer-events-none"
-              style={{ background: "var(--color-primary-container)" }}
-            />
-
-            <motion.div
-              animate={{ y: [-10, 10, -10] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative w-full max-w-[600px]"
-            >
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 16 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="relative rounded-2xl overflow-hidden"
-              >
-                <Image
-                  src="/bo.png"
-                  alt="SAR Back Office – Plataforma de Gestión Financiera"
-                  width={1200}
-                  height={750}
-                  className="w-full h-auto object-contain"
-                  priority
-                />
-              </motion.div>
-            </motion.div>
-          </motion.div>
-
-          {/* Right – Logo + título */}
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={1}
-            className="flex flex-col items-center md:items-start gap-4 flex-shrink-0"
-          >
-            <div className="flex items-center gap-4">
-              {/* Texto BACK OFFICE */}
-              <div className="leading-none">
-                <div className="text-4xl md:text-5xl font-black tracking-tight leading-none text-on-surface">
-                  BACK
-                </div>
-                <div
-                  className="text-4xl md:text-5xl font-black tracking-tight leading-none"
-                  style={{ color: "var(--color-primary-container)" }}
-                >
-                  OFFICE
-                </div>
-              </div>
-            </div>
-
-            {/* Divider */}
-            <div
-              className="h-px w-full"
-              style={{ background: "rgba(0,255,159,0.2)" }}
-            />
-
-            <div className="flex flex-col items-center md:items-start gap-2">
-              <p
-                className="text-xs md:text-sm font-bold tracking-[0.25em] uppercase"
-                style={{ color: "var(--color-on-surface-variant)" }}
-              >
-                Resumen del Proyecto
-              </p>
-              <p className="text-on-surface-variant text-sm leading-relaxed max-w-sm text-center md:text-left">
-                Plataforma de gestión financiera centralizada diseñada para automatizar procesos contables y optimizar la administración diaria de múltiples franquicias.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Spacer between projects */}
-        <div className="my-24 w-full max-w-3xl mx-auto h-px bg-gradient-to-r from-transparent via-primary-container/20 to-transparent" />
-
-        {/* ── Second Project: Text Left, Image Right ── */}
-        <div className="relative flex flex-col items-center gap-16 md:flex-row-reverse md:justify-center md:items-center md:gap-24">
-
-          {/* Right – imagen real del proyecto */}
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={0}
-            className="relative flex justify-center"
-          >
-            {/* Glow verde ambiental detrás de la imagen */}
-            <div
-              aria-hidden
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full blur-3xl opacity-20 pointer-events-none"
-              style={{ background: "var(--color-primary-container)" }}
-            />
-
-            <motion.div
-              animate={{ y: [-10, 10, -10] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="relative w-full max-w-[600px]"
-            >
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 16 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="relative rounded-2xl overflow-hidden"
-              >
-                <Image
-                  src="/app-coop.png"
-                  alt="App Financiera"
-                  width={1200}
-                  height={750}
-                  className="h-[350px] md:h-[450px] w-auto mx-auto object-contain drop-shadow-2xl"
-                />
-              </motion.div>
-            </motion.div>
-          </motion.div>
-
-          {/* Left – Logo + título */}
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={1}
-            className="flex flex-col items-center md:items-end gap-4 flex-shrink-0"
-          >
-            <div className="flex items-center gap-4">
-              {/* Texto APP FINANCIERA */}
-              <div className="leading-none text-center md:text-right">
-                <div className="text-4xl md:text-5xl font-black tracking-tight leading-none text-on-surface">
-                  APP
-                </div>
-                <div
-                  className="text-4xl md:text-5xl font-black tracking-tight leading-none"
-                  style={{ color: "var(--color-primary-container)" }}
-                >
-                  FINANCIERA
-                </div>
-              </div>
-            </div>
-
-            {/* Divider */}
-            <div
-              className="h-px w-full"
-              style={{ background: "rgba(0,255,159,0.2)" }}
-            />
-
-            <div className="flex flex-col items-center md:items-end gap-2">
-              <p
-                className="text-xs md:text-sm font-bold tracking-[0.25em] uppercase"
-                style={{ color: "var(--color-on-surface-variant)" }}
-              >
-                Resumen del Proyecto
-              </p>
-              <p className="text-on-surface-variant text-sm leading-relaxed max-w-sm text-center md:text-right">
-                Solución móvil intuitiva diseñada para la autogestión financiera. Facilita la consulta de saldos, ejecución de pagos, transferencias seguras y apertura de nuevos productos, optimizando la experiencia digital del usuario.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Spacer between projects */}
-        <div className="my-24 w-full max-w-3xl mx-auto h-px bg-gradient-to-r from-transparent via-primary-container/20 to-transparent" />
-
-        {/* ── Third Project: Image Left, Text Right ── */}
-        <div className="relative flex flex-col items-center gap-16 md:flex-row md:items-center md:gap-10">
-
-          {/* Left – imagen real del proyecto */}
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={0}
-            className="relative flex-1 flex justify-center"
-          >
-            {/* Glow verde ambiental detrás de la imagen */}
-            <div
-              aria-hidden
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full blur-3xl opacity-20 pointer-events-none"
-              style={{ background: "var(--color-primary-container)" }}
-            />
-
-            <motion.div
-              animate={{ y: [-10, 10, -10] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              className="relative w-full max-w-[600px]"
-            >
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 16 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="relative rounded-2xl overflow-hidden"
-              >
-                <Image
-                  src="/pj-project.png"
-                  alt="Papa Johns – Plataforma de Pedidos"
-                  width={1200}
-                  height={750}
-                  className="h-[350px] md:h-[450px] w-auto mx-auto object-contain drop-shadow-2xl"
-                />
-              </motion.div>
-            </motion.div>
-          </motion.div>
-
-          {/* Right – Logo + título */}
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={1}
-            className="flex flex-col items-center md:items-start gap-4 flex-shrink-0"
-          >
-            <div className="flex items-center gap-4">
-              {/* Texto PAPA JOHNS */}
-              <div className="leading-none text-center md:text-left">
-                <div className="text-4xl md:text-5xl font-black tracking-tight leading-none text-on-surface">
-                  PAPA
-                </div>
-                <div
-                  className="text-4xl md:text-5xl font-black tracking-tight leading-none"
-                  style={{ color: "var(--color-primary-container)" }}
-                >
-                  JOHNS
-                </div>
-              </div>
-            </div>
-
-            {/* Divider */}
-            <div
-              className="h-px w-full"
-              style={{ background: "rgba(0,255,159,0.2)" }}
-            />
-
-            <div className="flex flex-col items-center md:items-start gap-2">
-              <p
-                className="text-xs md:text-sm font-bold tracking-[0.25em] uppercase"
-                style={{ color: "var(--color-on-surface-variant)" }}
-              >
-                Resumen del Proyecto
-              </p>
-              <p className="text-on-surface-variant text-sm leading-relaxed max-w-sm text-center md:text-left">
-                Soporte técnico y mantenimiento de la plataforma web y móvil de pedidos en línea para las operaciones en Guatemala, Panamá y Costa Rica. Asegurando la estabilidad del sistema y un flujo de compra continuo.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-
+        {PROJECTS.map((project, i) => (
+          <Fragment key={project.image.src}>
+            {i > 0 && (
+              <div className="my-24 w-full max-w-3xl mx-auto h-px bg-gradient-to-r from-transparent via-primary-container/20 to-transparent" />
+            )}
+            <ProjectRow project={project} />
+          </Fragment>
+        ))}
       </div>
     </section>
   );

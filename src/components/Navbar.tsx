@@ -1,56 +1,62 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import CommandMenu from "./CommandMenu";
+
+const MENU_ID = "command-menu";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
+  const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-8 flex items-center justify-between transition-all duration-300">
-        <div className="flex items-center gap-4">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="text-lg font-orbitron font-bold tracking-tighter text-white"
-          >
-            DevOps42
-          </motion.div>
-        </div>
+      <header className="fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-8 flex items-center justify-between transition-all duration-300">
+        <motion.a
+          href="#hero"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="text-lg font-orbitron font-bold tracking-tighter text-white"
+        >
+          DevOps42
+        </motion.a>
 
+        <motion.button
+          ref={toggleRef}
+          type="button"
+          onClick={() => setIsMenuOpen((open) => !open)}
+          aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={isMenuOpen}
+          aria-controls={MENU_ID}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="text-primary-container transition-all flex flex-col items-center justify-center p-2 w-10 h-10 gap-1.5 relative overflow-hidden"
+        >
+          <motion.span
+            animate={isMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+            className="w-6 h-0.5 bg-primary-container block rounded-full"
+          />
+          <motion.span
+            animate={isMenuOpen ? { opacity: 0, x: -20 } : { opacity: 1, x: 0 }}
+            className="w-6 h-0.5 bg-primary-container block rounded-full"
+          />
+          <motion.span
+            animate={isMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+            className="w-6 h-0.5 bg-primary-container block rounded-full"
+          />
+        </motion.button>
+      </header>
 
-        <div className="flex items-center gap-4">
-
-          <motion.button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="text-primary-container transition-all flex flex-col items-center justify-center p-2 w-10 h-10 gap-1.5 relative overflow-hidden"
-          >
-            <motion.span
-              animate={isMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-              className="w-6 h-0.5 bg-primary-container block rounded-full"
-            />
-            <motion.span
-              animate={isMenuOpen ? { opacity: 0, x: -20 } : { opacity: 1, x: 0 }}
-              className="w-6 h-0.5 bg-primary-container block rounded-full"
-            />
-            <motion.span
-              animate={isMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-              className="w-6 h-0.5 bg-primary-container block rounded-full"
-            />
-          </motion.button>
-        </div>
-      </nav>
-
-      {/* Command Menu Drawer */}
       <CommandMenu
+        id={MENU_ID}
         isOpen={isMenuOpen}
-        onClose={() => setIsMenuOpen(false)}
+        onClose={closeMenu}
+        toggleRef={toggleRef}
       />
     </>
   );
