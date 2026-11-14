@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useCallback, useRef, useState } from "react";
 import CommandMenu from "./CommandMenu";
 
@@ -8,13 +8,26 @@ const MENU_ID = "command-menu";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
+
+  // Past the top of the page the bar gets a blurred backdrop so the logo and
+  // the menu button stay readable over the content scrolling underneath.
+  const { scrollY } = useScroll();
+  useMotionValueEvent(scrollY, "change", (y) => setIsScrolled(y > 24));
+  const showBackdrop = isScrolled && !isMenuOpen;
 
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-8 flex items-center justify-between transition-all duration-300">
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-10 flex items-center justify-between transition-all duration-300 ${
+          showBackdrop
+            ? "py-4 bg-background/70 backdrop-blur-xl shadow-[0_1px_0_rgba(0,255,159,0.12),0_8px_30px_rgba(0,0,0,0.35)]"
+            : "py-8 bg-transparent"
+        }`}
+      >
         <motion.a
           href="#hero"
           initial={{ opacity: 0, x: -20 }}
